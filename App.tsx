@@ -12,10 +12,9 @@ import {
   Archivo_600SemiBold
 } from "@expo-google-fonts/archivo";
 
-import { Scheduling } from './src/screens/Scheduling';
-
 import theme from './src/styles/theme';
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
+
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,7 +31,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SchedulingDetails />
+      <Routes />
     </ThemeProvider>
   )
 }

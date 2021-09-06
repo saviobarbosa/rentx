@@ -1,9 +1,11 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { RFValue } from 'react-native-responsive-fontsize';
 
+import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
-
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 
@@ -39,11 +41,15 @@ import {
     RentalPriceQuote,
     RentalPriceTotal
 } from './styles';
-import { Button } from '../../components/Button';
-import { RFValue } from 'react-native-responsive-fontsize';
 import theme from '../../styles/theme';
 
 export function SchedulingDetails(){
+    const navigation = useNavigation();
+
+    function handleConfirm() {
+        navigation.navigate("SchedulingComplete");
+    }
+
     return (
         <Container>
             <StatusBar
@@ -125,6 +131,7 @@ export function SchedulingDetails(){
                 <Button 
                     title="Alugar agora"
                     color={theme.colors.success}
+                    onPress={handleConfirm}
                 />
             </Footer>
         </Container>
