@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Alert, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import { useTheme } from "styled-components";
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { format } from 'date-fns';
 
 import ArrowSvg from "../../assets/arrow.svg";
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
 import { Calendar, DayProps, generateInterval, MarkedDatesProps } from '../../components/Calendar';
+
+import { getPlatformDate } from '../../utils/getPlatformDate';
+import { CarDTO } from '../../dtos/CarDTO';
 
 import {
     Container,
@@ -19,9 +23,6 @@ import {
     Content,
     Footer
 } from './styles';
-import { format } from 'date-fns';
-import { getPlatformDate } from '../../utils/getPlatformDate';
-import { CarDTO } from '../../dtos/CarDTO';
 
 interface RentalPeriod {
     start: number;
@@ -39,9 +40,11 @@ export function Scheduling(){
     const [markedDates, setMarkedDates] = useState<MarkedDatesProps>({} as MarkedDatesProps);
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
+    //Tema
     const theme = useTheme();
+    
+    //Navegação
     const navigation = useNavigation();
-
     const route = useRoute();
     const { car } = route.params as Params;
 

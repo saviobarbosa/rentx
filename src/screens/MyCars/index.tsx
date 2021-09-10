@@ -5,6 +5,9 @@ import { useTheme } from 'styled-components';
 import { AntDesign } from "@expo/vector-icons";
 
 import { BackButton } from '../../components/BackButton';
+import { Car } from '../../components/Car';
+import { LoadAnimation } from '../../components/LoadAnimation';
+
 import { CarDTO } from '../../dtos/CarDTO';
 import api from '../../services/api';
 
@@ -23,8 +26,6 @@ import {
     CarFooterPeriod,
     CarFooterDate,
 } from './styles';
-import { Car } from '../../components/Car';
-import { Load } from '../../components/Load';
 
 interface CarProps {
     id: string;
@@ -38,6 +39,7 @@ export function MyCars(){
     const [cars, setCars] = useState<CarProps[]>([]);
     const [loading, setLoading] = useState(true);
 
+    //Navegação
     const navigation = useNavigation();
     const theme = useTheme();
 
@@ -45,6 +47,7 @@ export function MyCars(){
         navigation.goBack();
     }
 
+    //Pegando os carros agendandos pelo usuário
     useEffect(() => {
         async function fetchCars() {
             try {
@@ -84,7 +87,7 @@ export function MyCars(){
                 </Subtitle>
             </Header>
 
-            { loading ? <Load /> : 
+            { loading ? <LoadAnimation /> : 
                 <Content>
                     <Appointments>
                         <AppointmentTitle>Agendamentos feitos</AppointmentTitle>

@@ -15,7 +15,13 @@ interface Props {
     loading?: boolean;
 }
 
-export function Button({ title, color, onPress, enabled = true, loading = false, ...rest }: Props){
+export function Button({ 
+    title, 
+    color, 
+    onPress, 
+    enabled = true, 
+    loading = false, 
+    ...rest }: Props){
     const theme = useTheme();
 
     return (

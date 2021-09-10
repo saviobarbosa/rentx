@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, StatusBar } from 'react-native';
-import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { Feather } from "@expo/vector-icons";
+import { format } from 'date-fns';
 
 import { Button } from '../../components/Button';
 import { Acessory } from '../../components/Acessory';
@@ -35,10 +36,10 @@ import {
     RentalPriceQuote,
     RentalPriceTotal
 } from './styles';
+
 import theme from '../../styles/theme';
 import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
-import { format } from 'date-fns';
 import { getPlatformDate } from '../../utils/getPlatformDate';
 import api from '../../services/api';
 
@@ -56,6 +57,7 @@ export function SchedulingDetails(){
     const [loading, setLoading] = useState(false);
     const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
+    //Navegação
     const navigation = useNavigation();
     const route = useRoute();
     const { car, dates } = route.params as Params;
@@ -116,7 +118,7 @@ export function SchedulingDetails(){
 
             <CarImages>
                 <ImageSlider 
-                    imagesUrl={[car.thumbnail]} 
+                    imagesUrl={car.photos} 
                 />
             </CarImages>
 

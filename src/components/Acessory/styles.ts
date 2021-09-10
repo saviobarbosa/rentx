@@ -19,4 +19,6 @@ export const Name = styled.Text`
     font-size: ${RFValue(12)}px;
     
     color: ${({ theme }) => theme.colors.text};
+
+    margin-top: 6px;
 `;
