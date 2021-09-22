@@ -21,6 +21,7 @@ import {
 } from './styles';
 import { InputPassword } from '../../../components/InputPassword';
 import { Button } from '../../../components/Button';
+import api from "../../../services/api";
 
 interface Params {
     user: {
@@ -44,7 +45,7 @@ export function SignUpSecondStep() {
         navigation.goBack();
     }
 
-    function handleRegister() {
+    async function handleRegister() {
         if(!password || !passwordConfirm) {
             return Alert.alert("Informe a senha e a confirmação.");
         }
@@ -52,13 +53,25 @@ export function SignUpSecondStep() {
         if(password !== passwordConfirm) {
             return Alert.alert("As senhas não são iguais.");
         }
-        
-        navigation.navigate("Confirmation", {
-            nextScreenRoute: "Signin",
-            title: "Conta criada!",
-            message: `Agora é só fazer login\ne aproveitar.`
+
+        await api.post("/users", {
+            name: user.name,
+            email: user.email,
+            driver_license: user.driverLicense,
+            password
+        })
+        .then(() => {
+            navigation.navigate("Confirmation", {
+                nextScreenRoute: "Signin",
+                title: "Conta criada!",
+                message: `Agora é só fazer login\ne aproveitar.`
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+            Alert.alert("OPA!", "Não foi possivel cadastrar");
         });
-    }
+    }   
 
     return (
         <KeyboardAvoidingView behavior="position" enabled>
